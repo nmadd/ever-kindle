@@ -1,2 +1,2 @@
 # ever-kindle
-A web scraper that transforms your Kindle highlights into Evernotes
+A web scraper that transforms your Kindle highlights into Evernotes (work in progress)
