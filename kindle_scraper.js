@@ -19,11 +19,45 @@ casper.then(function(){
     }, {personal_email: system.env.PERSONAL_EMAIL, kindle_pass: system.env.KINDLE_PASS});
 });
  
-//Wait to be redirected to the Home page, and then make a screenshot
+casper.then(function(){
+    casper.wait(3000);
+    // console.log("SCroll to bottom");
+    casper.repeat(200, function(){
+        this.scrollToBottom();
+        casper.wait(3000);
+    })
+    
+});
+
 casper.then(function(){
     casper.wait(5000);
     console.log("Make a screenshot and save it");
-    this.capture('Highlights.png');
+    this.capture('Highlights3.png');
 });
  
 casper.run();
+
+//div id = "stillLoadingBooks"
+
+//the function I'm trying to recursively loop before moving on to saving the capture image
+function checkMore() {
+
+    //check to see if the 'read more' button exists
+    if (casper.exists('#stillLoadingBooks')) {
+
+        //scroll to bottom      
+        casper.scrollToBottom();
+
+        //wait for the items to load, then run the check again
+        casper.wait(3000, checkMore);
+
+    }
+
+}
+
+// casper.thenOpen(urls.details, function() {
+
+//     //wait for the page along with ajax items to load shortly after
+//     this.wait(3000, checkMore);
+
+// });
